@@ -78,23 +78,6 @@
         font-variant: small-caps;
       }
 
-      #footer {
-        position: absolute;
-        bottom: 0;
-        height: 24px;
-        width: 100%;
-      }
-
-      #footer ul {
-        margin-left: 10px;
-        margin-bottom: 2px;
-      }
-      #footer li {
-        display: inline;        
-        margin-right: 20px;
-        margin-left: 0;
-      }
-
       #infos {
         position: absolute;
         padding: 10px;
@@ -141,6 +124,15 @@
         line-height: 120%;
         margin: 0;
       }
+      #infos ul.sources {
+        margin-left: 4px;
+        list-style: none;
+        font-size: 80%;
+      }
+      #infos .sources li {
+        line-height: 120%;
+        margin: 0;
+      }
 
     </style>
 
@@ -159,16 +151,6 @@
     <div id="header">
       <h1><span>Trafic annuel entrant par station à Paris</span></h1>
     </div>
-    <div id="footer">
-      <ul>
-        <!--<li>Trafic annuel entrant par station en 2011&nbsp;: <a href="http://data.ratp.fr/fr/les-donnees/fiche-de-jeu-de-donnees/dataset/trafic-annuel-entrant-par-station-2011.html">RATP</a></li>-->
-        <li>Trafic annuel entrant par station en 2011&nbsp;: <a href="http://www.data-publica.com/opendata/14699--trafic-annuel-2011-par-station-metro-rer">RATP</a></li>
-        <!--<li>Positions géographiques des stations&nbsp;: <a href="http://data.ratp.fr/fr/les-donnees/fiche-de-jeu-de-donnees/dataset/positions-geographiques-des-stations-du-reseau-ratp.html?tx_icsoddatastore_pi1[returnID]=38">RATP</a></li>-->
-        <li>Positions géographiques des stations&nbsp;: <a href="http://www.data-publica.com/opendata/14405--positions-geographiques-des-stations-du-reseau-ratp">RATP</a></li>
-        <li>Indices et couleurs de lignes&nbsp;: <a href="http://data.ratp.fr/fr/les-donnees/fiche-de-jeu-de-donnees/dataset/indices-et-couleurs-de-lignes-du-reseau-ferre-ratp.html?tx_icsoddatastore_pi1[page]=1&tx_icsoddatastore_pi1[returnID]=38">RATP</a></li>
-        <li>Contour de Paris: <a href="http://professionnels.ign.fr/geofla">IGN</a></li>
-      </ul>
-    </div>
     <div id="infos">
       <div class="active help">
         <h2>Infos</h2>
@@ -180,11 +162,27 @@
           Survolez une station ou une ligne pour plus d'informations.
         </p>
 
+	<hr />
+
         <p>
           <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Flabs.data-publica.com/ratp/&amp;layout=button_count&amp;action=like&amp;colorscheme=light" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100%; height:20px;" allowTransparency="true"></iframe>
           <a href="https://twitter.com/share" class="twitter-share-button" data-via="datapublica" data-lang="fr" data-dnt="true">Tweeter</a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          <br />
+          <a href="http://data-publica.com/"><img src="http://www.data-publica.com/favicon.ico" />&nbsp;Data Publica</a>
+          <br />
+          <a href="https://github.com/datapublica/ratp-trafic-map"><img src="http://www.github.com/favicon.ico" />&nbsp;Github</a>
         </p>
+        
+        <hr />
+
+        <ul class='sources'>
+          <li>Trafic annuel entrant par station en 2011&nbsp;: <a href="http://www.data-publica.com/opendata/14699--trafic-annuel-2011-par-station-metro-rer">RATP</a></li>
+          <li>Positions géographiques des stations&nbsp;: <a href="http://www.data-publica.com/opendata/14405--positions-geographiques-des-stations-du-reseau-ratp">RATP</a></li>
+          <li>Indices et couleurs de lignes&nbsp;: <a href="http://data.ratp.fr/fr/les-donnees/fiche-de-jeu-de-donnees/dataset/indices-et-couleurs-de-lignes-du-reseau-ferre-ratp.html?tx_icsoddatastore_pi1[page]=1&tx_icsoddatastore_pi1[returnID]=38">RATP</a></li>
+          <li>Contour de Paris: <a href="http://professionnels.ign.fr/geofla">IGN</a></li>
+          <li>Fait avec <a href="http://d3js.org">D3.js</a></li>
+        </ul>
       </div>
       <div class="infos_station">
         <h3><span></span></h3>
