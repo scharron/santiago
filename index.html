@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Trafic annuel entrant par station à Paris</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" media="screen">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <style>
@@ -89,6 +89,9 @@
 
       #infos h2 {
         text-align: center;
+        line-height: 30px;
+        font-size: 28px;
+        margin: 4px 0;
       }
 
       #infos .infos_station, #infos .infos_line {
@@ -134,13 +137,23 @@
         margin: 0;
       }
 
+      #dp {
+        background-color: #555;
+        padding-left:10px;
+      }
+      #dp img {
+        width: 200px;
+      }
+      hr {
+        margin: 10px 0;
+      }
+
     </style>
 
     <link href="ratp.colors.css" media="screen" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://code.jquery.com/jquery.min.js"></script>
     <script src="paris.path.js"></script>
@@ -169,10 +182,19 @@
           <a href="https://twitter.com/share" class="twitter-share-button" data-via="datapublica" data-lang="fr" data-dnt="true">Tweeter</a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
           <br />
-          <a href="http://data-publica.com/"><img src="http://www.data-publica.com/favicon.ico" />&nbsp;Data Publica</a>
-          <br />
           <a href="https://github.com/datapublica/ratp-trafic-map"><img src="http://www.github.com/favicon.ico" />&nbsp;Github</a>
         </p>
+
+	<hr />
+
+	<div id="dp"><a href="http://data-publica.com#labs-ratp"><img src="http://www.data-publica.com/static/img/logo.png""></a></div>
+        <span id="tagline"><i>Les données pour votre business</i></span>
+        <br />
+        <a href="http://www.data-publica.com/content/">Qui sommes-nous&nbsp;?</a>
+        <br />
+        <a href="http://www.data-publica.com/content/blog/data-news/">Notre blog d'actu</a>
+        <br />
+        <a href="http://www.data-publica.com/content/2013/01/le-trafic-metro-2011-en-une-dataviz/">Pourquoi cette dataviz&nbsp;?</a>
         
         <hr />
 
@@ -266,7 +288,7 @@
       // https://github.com/mbostock/d3/wiki/Geo-Projections#wiki-center
       var projection = d3.geo.mercator()
                              .translate([0, 0])
-                             .scale(250000)
+                             .scale(50000)
                              .center([median_x, median_y])
                              ;
       
@@ -341,6 +363,19 @@
              .on("mouseout", deselect_line)
              ;
     });
+    </script>
+
+    <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-21325121-6']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
 
     </script>
   </body>
