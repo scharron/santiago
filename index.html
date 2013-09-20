@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Trafic annuel entrant par station à Paris</title>
+    <title>Trafic annuel entrant par station à Santiago</title>
     <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" media="screen">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -25,7 +25,11 @@
         fill: #ddd;
       }
 
-      .paris {
+      .santiago {
+        fill: #bbb;
+      }
+
+      .santiago.province {
         fill: #ccc;
       }
 
@@ -150,19 +154,19 @@
 
     </style>
 
-    <link href="ratp.colors.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="santiago.colors.css" media="screen" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://code.jquery.com/jquery.min.js"></script>
-    <script src="paris.path.js"></script>
+    <script src="santiago.js"></script>
     <script src="helpers.js"></script>
     <script src="mouse.helpers.js"></script>
 
     <div id="map-container"></div>
     <div id="header">
-      <h1><span>Trafic annuel entrant par station à Paris</span></h1>
+      <h1><span>Trafic annuel entrant par station à Santiago</span></h1>
     </div>
     <div id="infos">
       <div class="active help">
@@ -235,13 +239,13 @@
 
       var viewport = svg.append("g")
                         .attr("id", "viewport")
-                        .attr("transform", "scale(1.5)")
+                        .attr("transform", "scale(0.75)")
                         .call(d3.behavior.zoom()
-                                .scale(1.5)
-                                .scaleExtent([0.9, 3])
+                                .scale(0.75)
+                                .scaleExtent([0.75, 1.5])
                                 .on("zoom", function() {
                                    viewport.attr("transform",
-                                     "translate(" + d3.event.translate + ")" +
+                                     //" translate(" + d3.event.translate + ")" +
                                      " scale(" + d3.event.scale + ")"
                                    );
                                 })
@@ -273,8 +277,8 @@
       }
 
 
-    d3.json("ratp.json", function(data) {
-      container_paris = container.append("g").attr("id", "paris");
+    d3.json("santiago.json", function(data) {
+      container_santiago = container.append("g").attr("id", "santiago");
       container_map = container.append("g").attr("class", "map");
       container_lines = container_map.append("g").attr("id", "lines");
       container_stations = container_map.append("g").attr("id", "stations");
@@ -283,7 +287,7 @@
       lines = data.lines;
 
       var median_x = d3.median(freq, function(e) { return e.latitude; });
-      var median_y = d3.median(freq, function(e) { return e.longitude; });
+      var median_y = d3.median(freq, function(e) { return e.longitude; }) - 0.03;
 
       // https://github.com/mbostock/d3/wiki/Geo-Projections#wiki-center
       var projection = d3.geo.mercator()
@@ -292,19 +296,25 @@
                              .center([median_x, median_y])
                              ;
       
-      // Function to project the paris borders in drawing coordinates
-      var line = d3.svg.line(paris)
-                       .interpolate("linear-closed")
-                       .x(function(d) { return projection(d)[0]; })
-                       .y(function(d) { return projection(d)[1]; })
-                       ;
+      // Function to project the santiago borders in drawing coordinates
+      for (var i = 0; i < santiago.length; ++i) {
+        var line = d3.svg.line(santiago[i]["coords"])
+                        .interpolate("linear")
+                        .x(function(d) { return projection(d)[0]; })
+                        .y(function(d) { return projection(d)[1]; })
+                        ;
 
-      // Create Paris' borders
-      container_paris.append("path")
-                     .attr("d", line(paris))
-                     .attr("class", "paris")
-                     //.on("click", click)
-                     ;
+        var klass = "santiago " + santiago[i]["name"];
+        if (i != 0)
+            klass += " province";
+
+        // Create Santiago's borders
+        container_santiago.append("path")
+                        .attr("d", line(santiago[i]["coords"]))
+                        .attr("class", klass)
+                        //.on("click", click)
+                        ;
+      }
 
       // Stuff needed to scale stations depending on their trafic
       var get_trafic = function(e) { return e.trafic; };
